@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			.flex-container {
+      			display: flex;  flex-direction:row;
+      			background-color: rgb(223, 147, 59);
+			}
+			.flex-container > div {  /*div children of the flex container*/
+  				background-color: #9e2e6f; 
+  				margin: 10px;  padding: 20px;  font-size: 30px;
+			}
+			/* Responsive layout */
+			@media (max-width: 600px) { 
+	 			.flex-container{
+		 			flex-direction:column;
+		 			background-color: rgb(171, 141, 42);
+	  			}
+			}
+		</style>
+		<title>Cycler item</title>
+	</head>
+	<body>
+		<h1>ABDUL RAHEEM SYED builds a cycler</h1>
+		<div class="flex-container" id="target">
+		  <div class="cycler">row item 1</div>   
+		  <div class="cycler">row item 2</div>  
+		  <div class="cycler">row item 3</div>  
+		</div><br>
+        <input type="text" id="userIn"><br>
+
+		<p class="message"> Press the button to create an new element of type div and then add it to the container.</p>
+		<button onclick="makeNewDiv()">Add Value</button>
+		<button onclick="get()">Get</button>
+		<button onclick="spin()">Spin</button>
+	</body>
+	<script>
+		function makeNewDiv(){
+			/* make the div and its text */
+			let element = document.createElement("div");
+			element.style.color = "limegreen";
+			let inputRead = document.getElementById("userIn").value;
+			element.innerHTML = inputRead;
+			element.className = " cycler";
+
+			/* add it to the container */
+			let container = document.getElementById('target');
+			container.appendChild(element);
+		}
+		function get(){
+			var cycle = document.getElementsByClassName("cycler");
+			var le = cycle.length;
+			if (le > 0){
+				cycle[le-1].remove();
+			}
+		}
+		function spin(){
+			var cycle = document.getElementsByClassName("cycler");
+			var le = cycle.length;
+			if (le > 1){
+				var removedItem = cycle[le-1];
+				cycle[le-1].remove();
+				var parentElem = document.getElementById("target");
+				parentElem.insertBefore(removedItem, parentElem.firstChild);
+			}
+		}
+	</script>
+</html>
